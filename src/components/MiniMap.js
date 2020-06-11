@@ -1,40 +1,49 @@
-import React from 'react';
-import * as THREE from 'three';
+import React from "react";
+import * as THREE from "three";
+import { updatePosition } from "../updatePosition";
 
 const mapStyle = {
-  border: '2px solid',
-  borderColor: 'blue',
-  margin: '10px',
-  width: '250px',
-  height: '250px',
-  position: 'absolute',
+  border: "2px solid",
+  borderColor: "blue",
+  margin: "10px",
+  width: "250px",
+  height: "250px",
+  position: "absolute",
 };
 
 const mapContainerStyle = {
-  padding: '10px',
-  width: '300px',
-  height: '300px',
+  padding: "10px",
+  width: "300px",
+  height: "300px",
 };
 
 const hSliderStyle = {
-  width: '250px',
-  height: '5px',
-  marginTop: '275px',
-  marginLeft: '12px',
-  position: 'absolute',
+  width: "250px",
+  height: "5px",
+  marginTop: "275px",
+  marginLeft: "12px",
+  position: "absolute",
 };
 
 const vSliderStyle = {
-  width: '250px',
-  height: '5px',
-  marginLeft: '150px',
-  marginTop: '134px',
-  position: 'absolute',
-  transform: 'rotate(-90deg)',
+  width: "250px",
+  height: "5px",
+  marginLeft: "150px",
+  marginTop: "134px",
+  position: "absolute",
+  transform: "rotate(-90deg)",
 };
 
 class MiniMap extends React.Component {
-  state = { posX: '0', posY: '0' };
+  constructor(props) {
+    super(props);
+    updatePosition((err, position) =>
+      this.setState({
+        position,
+      })
+    );
+  }
+  state = { position: { x: "0", y: "0" } };
 
   componentDidMount() {
     // === THREE.JS CODE START ===
@@ -51,7 +60,7 @@ class MiniMap extends React.Component {
     );
     var renderer = new THREE.WebGLRenderer();
     renderer.setSize(250, 250);
-    document.getElementById('map-container').appendChild(renderer.domElement);
+    document.getElementById("map-container").appendChild(renderer.domElement);
     var bgGeometry = new THREE.BoxGeometry(10, 10, 10);
     var bgMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
     var geometry = new THREE.BoxGeometry(0.25, 0.25, 0.25);
@@ -67,8 +76,8 @@ class MiniMap extends React.Component {
 
     var animate = () => {
       requestAnimationFrame(animate);
-      cube.position.x = this.state.posX;
-      cube.position.y = this.state.posY;
+      cube.position.x = this.state.position.x;
+      cube.position.y = this.state.position.y;
       renderer.render(scene, camera);
     };
     animate();
@@ -76,6 +85,8 @@ class MiniMap extends React.Component {
   }
 
   render() {
+    console.log(this.state);
+
     return (
       <div className="ui segment" style={mapContainerStyle}>
         <div id="map-container" style={mapStyle}></div>
@@ -105,7 +116,7 @@ class MiniMap extends React.Component {
             className="slider"
           />
         </div>
-        <div style={{ marginTop: '275px', marginLeft: '275px' }}>
+        <div style={{ marginTop: "275px", marginLeft: "275px" }}>
           <span>
             {this.state.posX}, {this.state.posY}
           </span>
