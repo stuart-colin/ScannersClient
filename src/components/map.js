@@ -58,7 +58,7 @@ export default class MapMesh {
       const cube = cubes[i];
 
       const cubeGeometry = new Three.Geometry();
-      const cubeMaterial = new Three.MeshBasicMaterial(0x000000);
+      const cubeMaterial = new Three.MeshBasicMaterial({ color: 0xa0a0a0 });
       //console.log(`CUBE: ${i}`);
       for (let j = 0; j < cube.length; j++) {
         const vec = cube[j];

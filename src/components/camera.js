@@ -7,7 +7,7 @@ export default class Camera {
       if (options === null || options === undefined) {
         options = { size: 10, near: 1, far: 1000 };
       } else {
-        console.log(options);
+        //console.log(options);
         options.size =
           options.size !== undefined || options.size !== null
             ? options.size

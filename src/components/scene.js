@@ -35,6 +35,6 @@ export default class Scene {
 
   Add(data) {
     this.#scene.add(data);
-    console.log(`${data}: added to scene`);
+    //console.log(`${data}: added to scene`);
   }
 }

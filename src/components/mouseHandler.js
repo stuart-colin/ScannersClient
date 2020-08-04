@@ -1,6 +1,5 @@
 import * as Three from "three";
 import GameHandler from "../gameHandler";
-import { log } from "three";
 
 export default class MouseHandler {
   constructor(scene, camera, canvas, debug = true) {
@@ -62,13 +61,13 @@ export default class MouseHandler {
     }
 
     if (hitGameMap) {
-      console.log(hitLocation);
+      // console.log(hitLocation);
       if (this.debug) {
         this.Debug();
       }
       await GameHandler.SendMarker(hitLocation);
     } else {
-      console.log("Didn't Hit The Game Map");
+      // console.log("Didn't Hit The Game Map");
     }
     // console.log("RAYCASTER");
     // console.log(this.#raycaster);
